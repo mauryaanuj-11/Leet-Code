@@ -1,0 +1,35 @@
+class Solution {
+    private:
+    bool checking(int a[26], int b[26]){
+        for (int i=0;i<26;i++){
+            if(a[i]!=b[i])
+            return false;
+        }
+        return true;
+    }
+
+public:
+    bool checkInclusion(string s1, string s2) {
+        int a[26]={0};
+        for(int i=0;i<s1.size();i++){
+            int index=s1[i]-'a';
+            a[index]++;
+        }
+
+        int b[26]={0};
+        for(int i=0;i<s2.length();i++){
+            if(i<s1.size()){
+                int index=s2[i]-'a';
+                b[index]++;
+            }
+            else {
+                b[s2[i]-'a']++;
+                b[s2[i-s1.length()]-'a']--;
+            }
+            if (checking(a,b))
+            return true;
+
+        }
+        return false;
+    }
+};
