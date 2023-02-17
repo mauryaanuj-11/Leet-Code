@@ -1,3 +1,5 @@
+// first Method using S-STREAM Method (Leet-code)
+
 class Solution {
 public:
     string reverseWords(string s) {
@@ -19,4 +21,37 @@ public:
         }
         return result;
     }
+};
+
+// using stack (GFG)
+
+class Solution
+{
+    public:
+    //Function to reverse words in a given string.
+    string reverseWords(string S) 
+    { 
+        // code here 
+        stack<string> st;
+        string str="";
+        string res="";
+        for(int i=0;i<S.size();i++){
+            if(S[i]!='.'){
+                str+=S[i];
+            }
+            if(S[i]=='.'){
+                st.push(str);
+                str="";
+            }
+        }
+          st.push(str);
+           
+         while(!st.empty()){
+             string s=st.top();
+             st.pop();
+             res+=s+".";
+         }
+         res.pop_back();
+         return res;
+    } 
 };
