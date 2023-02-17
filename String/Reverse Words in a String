@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        stringstream str(s);
+        string word;
+        vector<string> vec;
+        string result;
+        while(str >> s){
+            vec.push_back(s); //or vec.push_back(word);
+        } 
+        int size=vec.size();
+        for(int i=size-1;i>=0;i--){
+            if((i!=0)){
+               result+=vec[i]+" ";
+              // result+=' ';
+            }
+            else
+             result+=vec[i];
+        }
+        return result;
+    }
+};
