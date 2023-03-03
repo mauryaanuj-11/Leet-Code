@@ -1,0 +1,58 @@
+// 1  st approach to solve by mapping
+class Solution {
+public:
+    long long maximumSubarraySum(vector<int>& nums, int k) {
+        int n=nums.size();
+        long long int sum=0,maxi=0;
+        map<int ,int> mapping;
+        for(int i=0;i<k-1;i++){
+            mapping[nums[i]]++;
+            sum+=nums[i];
+        }
+        for(int i=k-1;i<n;i++){
+            sum+=nums[i];
+            mapping[nums[i]]++;
+            if(mapping.size()==k)
+            maxi=max(maxi,sum);
+            if(mapping[nums[i-k+1]]==1)
+            mapping.erase(nums[i-k+1]);
+            else
+            mapping[nums[i-k+1]]--;
+            
+            sum=sum-nums[i];
+        }
+        return maxi;
+    }
+};
+
+
+//2nd apporach to solve the problem
+class Solution {
+public:
+    long long maximumSubarraySum(vector<int>& nums, int k) {
+        long long int sum=0, mx=0, i=0;
+        unordered_set<int> s;
+        for(int j = 0; j<nums.size(); j++)
+        {
+           while(i < j && (s.count(nums[j]) || s.size() >= k))
+            { 
+              sum -= nums[i];
+              s.erase(nums[i]);
+              i++;
+            }
+           sum +=nums[j];
+           s.insert(nums[j]);
+            
+           if (s.size() == k)
+             mx = max(mx, sum);
+        }
+        return mx;
+    }
+};
+
+
+
+
+
+
+
