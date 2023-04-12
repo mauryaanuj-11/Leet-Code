@@ -1,0 +1,45 @@
+// 1st- Method (Using length of Link list)
+
+ class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* temp=head;
+        int cnt=0;
+        while(temp!=NULL){
+            temp=temp->next;
+            cnt++;
+        }
+        int len=cnt/2+1;
+        int i=1;
+        ListNode* ans=head;
+        while(i<len){
+            ans=ans->next;
+            i++;
+        }
+        return ans;
+    }
+};
+
+// 2nd- Method (Using the method of faster and slower rule)
+
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* fast=head;
+        ListNode* slow=head;
+        if(head==NULL || head->next==NULL)
+        return head;
+        
+        if(head->next->next==NULL)
+        return head->next;
+        
+        while(fast!=NULL){
+            fast=fast->next;
+            if(fast!=NULL){
+              fast=fast->next;
+              slow=slow->next;
+            }
+        }
+        return slow;
+    }
+};
