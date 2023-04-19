@@ -1,0 +1,23 @@
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(head==NULL )
+        return head;
+        
+        ListNode* slow=head;
+        ListNode* fast=head;
+        ListNode* MeetingPoint=head;
+        while(fast->next!=NULL && fast->next->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                while(slow!=MeetingPoint){
+                    slow=slow->next;
+                    MeetingPoint=MeetingPoint->next;
+                }
+                return MeetingPoint;
+            }
+        }
+        return NULL;
+    }
+};
