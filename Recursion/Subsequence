@@ -1,0 +1,21 @@
+class Solution {
+   
+    vector<vector<int>> ans;
+    void printF(int ind,vector<int> &arr, vector<int> &nums){
+
+        if(ind==nums.size()){
+            ans.push_back(arr);
+            return ;
+        }
+        arr.push_back(nums[ind]);
+        printF(ind+1,arr,nums);
+        arr.pop_back();
+        printF(ind+1,arr,nums);
+    }
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int> arr;
+        printF(0,arr,nums);
+        return ans;
+    }
+};
