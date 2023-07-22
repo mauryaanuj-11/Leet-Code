@@ -1,0 +1,20 @@
+#include <bits/stdc++.h> 
+int getLongestSubarray(vector<int>& a, int k){
+    // Write your code here
+     map<long long,int> mp;
+    long long sum=0;
+    int maxLen=0;
+    for(int i=0;i<a.size();i++){
+        sum+=a[i];
+        if(sum==k)
+        maxLen=max(maxLen,i+1);
+        long long key=sum-k;
+        if(mp.find(key)!=mp.end()){
+           // int p=i-mp[key];
+            maxLen=max(maxLen,i-mp[key]);
+        }
+        if(mp.find(sum)==mp.end())  //it is used for the zeros, if is not used then it update the value
+        mp.insert({sum,i});
+    }
+    return maxLen;
+}
