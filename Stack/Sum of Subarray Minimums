@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void rightSmaller(vector<int> & arr, vector<int> & right){
+    int psudoIndex= arr.size();
+    stack<pair<int,int>> st;
+    for(int i=arr.size()-1;i>=0;i--){
+        if(st.size()==0)
+        right.push_back(psudoIndex);
+        else if(st.size()>0 && st.top().first<arr[i])
+        right.push_back(st.top().second);
+        else if(st.size()>0 && st.top().first>=arr[i]){
+            while(st.size()>0 && st.top().first>=arr[i])
+                st.pop();
+            
+            if(st.size()==0)
+            right.push_back(psudoIndex);
+            else
+            right.push_back(st.top().second);
+        }
+        st.push({arr[i],i});
+    }
+    reverse(right.begin(),right.end());
+
+}
+
+
+void leftSmall(vector<int> &arr,vector<int> &left){
+    int psudoIndex=-1;
+    stack<pair<int,int>> st;
+    for(int i=0;i<arr.size();i++){
+        if(st.size()==0)
+        left.push_back(psudoIndex);
+        else if(st.size()>0 && (st.top().first<=arr[i] ))
+        left.push_back(st.top().second);
+        else if(st.size()>0 && st.top().first>arr[i]){
+            while(st.size()>0 && st.top().first>arr[i])
+                st.pop();
+            
+            if(st.size()==0)
+            left.push_back(psudoIndex);
+            else
+            left.push_back(st.top().second);
+        }
+        st.push({arr[i],i});
+    }
+
+}
+
+int main()
+{
+   // vector<int> arr{71,55,82,55}
+    vector<int> arr{71,55,82,55},right,left;
+    rightSmaller(arr,right);
+    leftSmall(arr,left);
+    for(int i:left)
+    cout<<i<<" ";
+    cout<<endl;
+    for(int i:right)
+    cout<<i<<" ";
+    cout<<endl;
+     int sum=0;
+    for(int i=0;i<arr.size();i++){
+        left[i]=i-left[i];
+        right[i]=right[i]-i;
+        sum+=arr[i]*left[i]*right[i];
+    }
+    cout<<sum;
+}
+
