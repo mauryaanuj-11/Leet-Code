@@ -1,0 +1,36 @@
+class Solution{
+public:
+	int search(string pat, string txt) {
+	    // code here
+	int i=0,j=0,k=pat.size(),ans=0;
+    map<char,int> mp;
+    for(auto it : pat){
+        mp[it]++;
+    }
+    int cnt=mp.size();
+    
+    while(j<txt.size()){
+        if(mp.find(txt[j])!=mp.end()){
+            mp[txt[j]]--;
+            if(mp[txt[j]]==0)   // if all element fount of the particular character,
+            cnt--;                      //then we decrement the size of the map.
+        }
+        if(j-i+1<k)
+        j++;
+        else if(j-i+1==k){
+            if(cnt==0)
+            ans++;
+            char ch=txt[i];
+            if(mp.find(ch)!=mp.end()){
+                mp[ch]++;
+                if(mp[ch]==1)   // here 1 is stricky used b/c we want to just increse the map size.
+                cnt++;
+            }
+            i++;
+            j++;
+        }
+    }
+    return ans;
+  }
+
+};
