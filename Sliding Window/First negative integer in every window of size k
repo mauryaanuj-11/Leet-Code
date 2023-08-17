@@ -1,0 +1,26 @@
+vector<long long> printFirstNegativeInteger(long long int arr[],
+                                             long long int N, long long int k) {
+        int i=0,j=0;
+        list<long long > li;
+        vector<long long> vec;
+        while(j<N){
+         if(arr[j]<0)
+            li.push_back(arr[j]);
+        if(j-i+1<k){
+            j++;
+        }
+        else if(j-i+1==k){
+            if(li.size()==0)
+            vec.push_back(0);
+            else
+            vec.push_back(li.front());
+            if(li.front()==arr[i])
+            li.pop_front();
+            i++;
+            j++;
+        }
+     
+    }
+    return vec;
+                                                 
+ }
