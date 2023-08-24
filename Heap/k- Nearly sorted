@@ -1,0 +1,42 @@
+Class Solution{
+public:
+    //Function to return the sorted array.
+    vector <int> nearlySorted(int arr[], int num, int k){
+        // Your code here
+        priority_queue<int, vector<int> , greater<int> > minH;
+        vector<int> ans;
+        for(int i=0;i<num;i++){
+            minH.push(arr[i]);
+            if(minH.size()>k){
+                ans.push_back(minH.top());
+                minH.pop();
+            }
+        }
+        
+        while(!(minH.empty())){
+            ans.push_back(minH.top());
+            minH.pop();
+        }
+        return ans;
+    }
+public:
+    //Function to return the sorted array.
+    vector <int> nearlySorted(int arr[], int num, int k){
+        // Your code here
+        priority_queue<int, vector<int> , greater<int> > minH;
+        vector<int> ans;
+        for(int i=0;i<num;i++){
+            minH.push(arr[i]);
+            if(minH.size()>k){
+                ans.push_back(minH.top());
+                minH.pop();
+            }
+        }
+        
+        while(!(minH.empty())){
+            ans.push_back(minH.top());
+            minH.pop();
+        }
+        return ans;
+    }
+};
