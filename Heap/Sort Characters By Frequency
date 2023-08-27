@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string frequencySort(string arr) {
+    map<int,int> mp;
+    priority_queue<pair<int,int>> pq;
+    for(auto it:arr)
+    mp[it]++;
+
+    for(auto it : mp){
+        pq.push({it.second,it.first});
+    }
+    string str="";
+    while(!(pq.empty())){
+        int first=pq.top().first;
+        int second=pq.top().second;
+        for(int it=0;it<first;it++){
+            str.push_back(char(second));
+        }
+        pq.pop();
+    }
+    return str;
+    }
+};
