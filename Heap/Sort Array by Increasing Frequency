@@ -1,0 +1,17 @@
+map<int,int> mp;
+    priority_queue<pair<int,int> , vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    for(auto it:arr)
+    mp[it]++;
+
+    for(auto it : mp){
+        pq.push({it.first,it.second});
+    }
+    vector<int> ans;
+    while(!(pq.empty())){
+        int first=pq.top().first;
+        int second=pq.top().second;
+        for(int it=0;it<second;it++){
+            ans.push_back(first);
+        }
+        pq.pop();
+    }
