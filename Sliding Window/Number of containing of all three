@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+        int i=0,j=0;
+        int n=s.size(),cnt=0;
+        map<char,int> m;
+
+        while(j<s.size()){
+            m[s[j]]++;
+            while(m['a']>=1 && m['b']>=1 && m['c']>=1 ){
+                cnt+=n-j;
+                m[s[i]]--;
+                i++;
+            }
+            j++;
+        }
+        return cnt;
+    }
+};
