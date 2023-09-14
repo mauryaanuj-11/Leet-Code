@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        string newString="";
+        stringstream ss(s);
+        string word;
+        string str,res;
+        
+        while(ss >> word){
+            newString+=word;
+            newString+=" ";
+        }
+        
+        for(int i=newString.size()-2;i>=0;i--){
+            if(newString[i]!=' '){
+                str+=newString[i];
+            }
+            else{
+                reverse(str.begin(),str.end());
+                res+=str;
+                res+=" ";
+                str="";
+            }
+        }
+        reverse(str.begin(),str.end());
+        res+=str;
+        return res;       
+    }
+};
