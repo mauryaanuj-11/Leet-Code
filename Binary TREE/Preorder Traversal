@@ -1,0 +1,17 @@
+void findPreorder(TreeNode* root, vector<int> &ans){
+    if(root==NULL){
+        return ;
+    }
+    ans.push_back(root->val);
+    findPreorder(root->left,ans);
+    findPreorder(root->right,ans);
+}
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        findPreorder(root, ans);
+        return ans;
+    }
+};
