@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        list<TreeNode*> li;
+        vector<vector<int>> result;
+        if(root==NULL)
+        return result;
+        li.push_back(root);
+
+        while(! li.empty() ){
+            vector<int> temp;
+            int size=li.size();
+            for(int i=0;i<size;i++){
+                TreeNode* node=li.front();
+                li.pop_front();
+                if(node->left!=NULL)   li.push_back(node->left);
+                if(node->right!=NULL)  li.push_back(node->right);
+                temp.push_back(node->val);
+            }
+            result.push_back(temp);
+        }
+        return result;
+    }
+};
+
