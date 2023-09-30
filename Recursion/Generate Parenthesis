@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//string ans;
+void GenerateParenthesis(string &str, int open, int close){
+    if(open ==0 && close==0){
+        cout<<str<<" ";
+        return ;
+    }
+
+    if(open>0){
+        str.push_back('(');
+        GenerateParenthesis(str,open-1,close);
+        str.pop_back();
+    }
+
+    if(close>0){
+        if(open<close){
+            str.push_back(')');
+            GenerateParenthesis(str,open,close-1);
+            str.pop_back();
+        }
+    }
+}
+
+int main()
+{
+    int x;
+    cout<<"Enter your number ";
+    cin>>x;
+    int open=x,close=x;
+    string str="";
+    GenerateParenthesis(str,open,close);
+}
