@@ -1,0 +1,73 @@
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int n=matrix.size(),m=matrix[0].size();
+        int maxi=0;
+        vector<int> vec(m,0);
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j]=='1')
+                vec[j]++;
+                else
+                vec[j]=0;
+            }
+            int area=largestRectangleArea(vec);
+            maxi=max(maxi,area);
+        }
+        return maxi;
+    }
+
+     int largestRectangleArea(vector<int>& heights) {
+        stack<pair<int,int>> st,pt;
+        vector<int> left,right;
+        int n=heights.size();
+
+        // This is for the NSL
+        for(int i=0;i<n;i++){
+        if(st.size()==0)
+        left.push_back(-1);  // PsudoINdex for leftside
+        else if(st.size()>0 && st.top().first< heights[i])
+        left.push_back(st.top().second);
+        else if(st.size()>0 && st.top().first>=heights[i]){
+            while(st.size()>0 && st.top().first>=heights[i])
+            st.pop();
+
+            if(st.size()==0)
+            left.push_back(-1);
+            else
+            left.push_back(st.top().second);
+        }
+        st.push({heights[i],i});
+        }
+
+        // This is for the NSR
+        for(int i=n-1;i>=0;i--){
+        if(pt.size()==0)
+        right.push_back(n);   // PsudoINdex for rightside
+        else if(pt.size()>0 && pt.top().first< heights[i])
+        right.push_back(pt.top().second);
+        else if(pt.size()>0 && pt.top().first>=heights[i]){
+            while(pt.size()>0 && pt.top().first>=heights[i])
+            pt.pop();
+
+            if(pt.size()==0)
+            right.push_back(n);
+            else
+            right.push_back(pt.top().second);
+        }
+        pt.push({heights[i],i});
+        }
+        reverse(right.begin(),right.end());
+        
+        // Here we are the evaluting the largest rectangle area
+        int max_area=INT_MIN;
+        for(int i=0;i<n;i++ ){
+            int width=right[i]-left[i]-1;
+            int area=heights[i]*width;
+            max_area=max(max_area,area);
+        }
+
+        return max_area;
+    }
+};
