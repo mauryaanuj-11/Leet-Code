@@ -1,0 +1,18 @@
+class Solution {
+    private:
+    void rightSide(TreeNode* Node, int size){
+        if(Node==NULL){
+            return ;
+        }
+        if(res.size()==size)
+        res.push_back(Node->val);
+        if(Node->right) rightSide(Node->right,size+1);
+        if(Node->left)  rightSide(Node->left, size+1);
+    }
+public:
+    vector<int> res;
+    vector<int> rightSideView(TreeNode* root) {
+        rightSide(root,0);
+        return res;
+    }
+};
