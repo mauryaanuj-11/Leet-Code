@@ -1,0 +1,27 @@
+ vector<int> topView(Node *root)
+    {
+        vector<int> res;
+        queue<pair<Node*,int>> q;
+        map<int,Node*> m;
+        if(root==NULL)
+        return res;
+        q.push({root,0});
+        
+        while(!(q.empty())){
+            auto temp=q.front();
+            q.pop();
+            Node* Noddy=temp.first;
+            int num=temp.second;
+            if(m.find(num)== m.end())
+            m[num]=Noddy;
+            if(Noddy->left != NULL)
+            q.push({Noddy->left,num-1});
+            if(Noddy->right != NULL)
+            q.push({Noddy->right, num+1});
+        }
+        for(auto it : m){
+          //  cout<<it.second<<" ";
+         //   Node* i=it.second;
+            res.push_back(it.second->data);
+        }
+        return res;
